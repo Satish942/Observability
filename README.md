@@ -112,3 +112,28 @@ sudo systemctl restart grafana-server
 prom- http://3.110.175.149:9090/graph
 grphana - http://3.110.175.149:3000/admin
 nodeexp - http://3.110.175.149:9100/metrics
+
+## setups
+eksctl create cluster --name devendra-streaming-app --region us-east-2 --node-type t3.medium --nodes 2 --nodes-min 2 --nodes-max 5 --zones us-east-2a,us-east-2b
+
+# cluster creation
+eksctl create cluster --name "monitor-cluster" --region "ap-south-1" --nodegroup-name "default-ng" --node-type "t3.large" --nodes 2  --nodes-min 2 --nodes-max 4 --managed
+
+aws eks update-kubeconfig --region ap-south-1 --name monitor-cluster
+
+Prashant Kumar Dey
+03:07 PM
+
+eksctl create cluster --name "$CLUSTER_NAME" --region "$AWS_REGION" --nodegroup-name "default-ng" --node-type "t3.large" --nodes 2  --nodes-min 2 --nodes-max 4 --managed
+
+aws eks update-kubeconfig --region <region> --name <cluster-name>
+
+kubectl config current-context
+
+eksctl create addon --name aws-ebs-csi-driver --cluster <cluster-name> --region <region>
+
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
+helm repo update
+
+helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --create-namespace
