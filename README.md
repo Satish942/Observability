@@ -107,3 +107,8 @@ Restart
 ```bash
 sudo systemctl restart grafana-server
 ```
+### endpoints 
+
+prom- http://3.110.175.149:9090/graph
+grphana - http://3.110.175.149:3000/admin
+nodeexp - http://3.110.175.149:9100/metrics
